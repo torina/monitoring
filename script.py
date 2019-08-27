@@ -3,15 +3,12 @@ import requests
 import os
 import datetime as dt
 # import telegram
-from apscheduler.schedulers.blocking import BlockingScheduler
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 
 # checking status every 2 hours
 SLEEP_INTERVAL = 7200
 FINANCE_URL = "http://resources.finance.ua/ua/public/currency-cash.json"
-sched = BlockingScheduler()
-
 
 def send_telegram(dollar):
     # chat = "-383060434"
@@ -19,7 +16,7 @@ def send_telegram(dollar):
     chat_viki = "232590195"
     # bot = telegram.Bot(token=token)
     # print(bot.get_me())
-    requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={chat_viki}&text=Hallo Tiere!🐱🐰%20Dollar={dollar}.\nMehr%20unter%20https://crystalbank.com.ua/")
+    requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={chat_viki}&text=Hallo!💲%20Dollar={dollar}.\nMehr%20unter%20https://crystalbank.com.ua/")
 
 
 while True:
