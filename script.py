@@ -1,7 +1,7 @@
 import time
 import requests
 import os
-# import datetime as dt
+import datetime as dt
 # import telegram
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -23,7 +23,6 @@ def send_telegram(dollar):
 
 
 while True:
-    print("Ok")
     sent_weekly = 0
     myResponse = requests.get(FINANCE_URL)
     if myResponse.status_code != 200:
@@ -32,21 +31,18 @@ while True:
     content = myResponse.json()
     date = content["date"]
 
-    # if dt.date.today().isoweekday() == 2:
-    #     print("Sending weekly...")
-
     for bank in content["organizations"]:
         if bank["id"] == "7oiylpmiow8iy1smgg3":
             usd = float(bank["currencies"]["USD"]["ask"])
             send_telegram(usd)
 
             #every monday
-            # if dt.date.today().isoweekday() == 1:
-            #     print("Sending weekly...")
-            #     send_telegram(usd)
-                # sent_weekly = 1
-            # else:
-                # sent_weekly = 0
+            if dt.date.today().isoweekday() == 2:
+                print("Sending weekly...")
+                send_telegram(usd)
+                sent_weekly = 1
+            else:
+                sent_weekly = 0
             #if is interesting
             if 26.40 < usd < 26.96:
                 print("Sending message...")
