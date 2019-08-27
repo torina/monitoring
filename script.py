@@ -23,7 +23,7 @@ while True:
     sent_weekly = 0
     myResponse = requests.get(FINANCE_URL)
     if myResponse.status_code != 200:
-        print('Not Found.')
+        print('Not Found')
 
     content = myResponse.json()
     date = content["date"]
