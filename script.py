@@ -31,7 +31,6 @@ while True:
     for bank in content["organizations"]:
         if bank["id"] == "7oiylpmiow8iy1smgg3":
             usd = float(bank["currencies"]["USD"]["ask"])
-            send_telegram(usd)
 
             #every monday and thursday
             if dt.date.today().isoweekday() == 1 or dt.date.today().isoweekday() == 4:
