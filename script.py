@@ -33,8 +33,8 @@ while True:
             usd = float(bank["currencies"]["USD"]["ask"])
             send_telegram(usd)
 
-            #every monday
-            if dt.date.today().isoweekday() == 2:
+            #every monday and thursday
+            if dt.date.today().isoweekday() == 1 or dt.date.today().isoweekday() == 4:
                 print("Sending weekly...")
                 send_telegram(usd)
                 sent_weekly = 1
