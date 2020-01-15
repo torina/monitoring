@@ -6,8 +6,8 @@ import datetime as dt
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 
-# checking status every 2 hours
-SLEEP_INTERVAL = 7200
+# checking status every 12 hours
+SLEEP_INTERVAL = 43200
 FINANCE_URL = "http://resources.finance.ua/ua/public/currency-cash.json"
 
 def send_telegram(dollar):
@@ -16,7 +16,7 @@ def send_telegram(dollar):
     chat_viki = "232590195"
     # bot = telegram.Bot(token=token)
     # print(bot.get_me())
-    requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={chat_viki}&text=Hallo!💲%20Dollar={dollar}.\nMehr%20unter%20https://crystalbank.com.ua/")
+    requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={chat_viki}&text=Hallo!💲%20Dollar={dollar}.")
 
 
 while True:
@@ -33,7 +33,7 @@ while True:
             usd = float(bank["currencies"]["USD"]["ask"])
 
             #every monday and thursday
-            if dt.date.today().isoweekday() == 1 or dt.date.today().isoweekday() == 4:
+            if sent_weekly == 0 and (dt.date.today().isoweekday() == 1 or dt.date.today().isoweekday() == 4):
                 print("Sending weekly...")
                 send_telegram(usd)
                 sent_weekly = 1
